@@ -13,6 +13,11 @@ function App() {
         <NavBar />
         <div className="rounded-xl px-2 py-2">
           <Thumbnail />
+          <div className="label px-4 py-4 my-4  mx-auto">
+            <span className=" bg-slate-50 rounded-md px-4 py-1 my-4  mx-auto">
+              Made with💗 by Ronak 
+            </span>
+          </div>
         </div>
       </div>
     </>

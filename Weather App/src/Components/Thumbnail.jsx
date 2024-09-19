@@ -87,7 +87,7 @@ const Thumbnail = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
         <div className="relative z-10 p-4 flex flex-col h-full">
           <h2 className="text-white text-xl mb-4">Weather</h2>
-          <div className="flex-grow">{/* Other content can go here */}</div>
+          <div className="flex-grow"></div>
           <div className="flex flex-col items-start justify-end">
             <div className="text-teal-50">
               <QuoteGenerator />
@@ -103,6 +103,7 @@ const Thumbnail = () => {
         <Weather />
       </div>
     </div>
+ 
   );
 };
 

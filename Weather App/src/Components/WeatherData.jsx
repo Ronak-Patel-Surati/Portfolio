@@ -35,6 +35,7 @@ const Weather = () => {
 
   useEffect(() => {
     const getLocationAndFetchWeather = () => {
+        setError(null);
       if (navigator.geolocation && !city) { // Only use location if no city is provided
         navigator.geolocation.getCurrentPosition(
           (position) => {
