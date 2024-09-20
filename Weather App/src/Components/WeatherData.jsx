@@ -9,7 +9,7 @@ const Weather = () => {
 
   // Function to fetch weather data based on city name or coordinates
   const fetchWeather = async (lat = null, lon = null) => {
-    const apiKey = 'c1286f58cc76ee439a45738585644d04'; // Replace with your actual API key
+    const apiKey = 'c1286f58cc76ee439a45738585644d04'; 
     let url;
 
     if (lat && lon) {
