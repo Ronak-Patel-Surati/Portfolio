@@ -8,18 +8,22 @@ const Weather = () => {
   const [loading, setLoading] = useState(false); 
 
   // Function to fetch weather data based on city name or coordinates
-  const fetchWeather = async (lat = null, lon = null) => {
-    const apiKey = 'c1286f58cc76ee439a45738585644d04'; 
+  const fetchWeather = async (lat = null, lon = null, city = null) => {
+    const apiKey = 'f07cdf6080ee17b38fd72a5a1c6d3862'; 
     let url;
-
+  
     if (lat && lon) {
       url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
-    } else {
+    } else if (city) {
       url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    } else {
+      throw new Error('Please provide either latitude/longitude or a city name');
     }
-
+  
     try {
+      setLoading(true); // Start loading before fetching
       const response = await fetch(url);
+      console.log(response)
       if (!response.ok) {
         throw new Error('Unable to Fetch Weather Data');
       }
@@ -29,9 +33,10 @@ const Weather = () => {
       console.error('There has been a problem with your fetch operation:', error);
       setError(error.message);
     } finally {
-      setLoading(false);
+      setLoading(false); // Stop loading after the fetch completes
     }
   };
+  
 
   useEffect(() => {
     const getLocationAndFetchWeather = () => {
@@ -48,11 +53,10 @@ const Weather = () => {
           }
         );
       } else if (city) { // Fetch weather if city is set
-        fetchWeather();
+        fetchWeather(null, null, city);
       }
     };
 
-    setLoading(true); // Start loading before fetching
     getLocationAndFetchWeather();
   }, [city]);
 
@@ -61,7 +65,11 @@ const Weather = () => {
   };
 
   const handleSearch = () => {
-    setCity(inputValue);
+    if (!inputValue) {
+      setError("Please enter a city name");
+      return;
+    }
+    setCity(inputValue); // This will trigger useEffect to fetch weather for the new city
     setLoading(true); // Set loading to true while fetching new data
   };
 
